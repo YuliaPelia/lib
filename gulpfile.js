@@ -5,10 +5,9 @@ const webpack = require("webpack-stream");
 const browsersync = require("browser-sync");
 
 const dist = "./dist/";
-// const dist = "/Applications/MAMP/htdocs/test"; // Ссылка на вашу папку на сервере
 
 gulp.task("copy-html", () => {
-    return gulp.src("./src/*.html")
+    return gulp.src("./src/index.html")
                 .pipe(gulp.dest(dist))
                 .pipe(browsersync.stream());
 });
@@ -53,17 +52,12 @@ gulp.task("copy-assets", () => {
 
 gulp.task("watch", () => {
     browsersync.init({
-        server: {
-            baseDir: "./dist/",
-            serveStaticOptions: {
-                extensions: ["html"]
-            }
-        },
+		server: "./dist/",
 		port: 4000,
 		notify: true
     });
     
-    gulp.watch("./src/*.html", gulp.parallel("copy-html"));
+    gulp.watch("./src/index.html", gulp.parallel("copy-html"));
     gulp.watch("./src/assets/**/*.*", gulp.parallel("copy-assets"));
     gulp.watch("./src/js/**/*.js", gulp.parallel("build-js"));
 });
