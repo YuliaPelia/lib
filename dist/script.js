@@ -120,21 +120,18 @@ Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.dropdown-toggle').dropdo
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
 
-const scroll = calcScroll();
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function () {
+  const scroll = calcScroll();
   for (let i = 0; i < this.length; i++) {
     const target = this[i].getAttribute('data-target');
     Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).click(e => {
       e.preventDefault();
       Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeIn(500);
+      Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').style.display = 'block';
       document.body.style.overflow = 'hidden';
       document.body.style.marginRight = `${scroll}px`;
-      // document.body.style.marginRight = `0px`;
-
-      // document.querySelector('.fixed-gift').style.marginRight = `${scroll}px`;
     });
   }
-
   const closeElements = document.querySelectorAll('[data-close]');
   closeElements.forEach(elem => {
     Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(elem).click(() => {
@@ -150,18 +147,18 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function () {
       document.body.style.marginRight = `0px`;
     }
   });
+  function calcScroll() {
+    let div = document.createElement('div');
+    div.style.width = '50px';
+    div.style.height = '50px';
+    div.style.overflowY = 'scroll';
+    div.style.visibility = 'hidden';
+    document.body.appendChild(div);
+    let scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+    return scrollWidth;
+  }
 };
-function calcScroll() {
-  let div = document.createElement('div');
-  div.style.width = '50px';
-  div.style.height = '50px';
-  div.style.overflowY = 'scroll';
-  div.style.visibility = 'hidden';
-  document.body.appendChild(div);
-  let scrollWidth = div.offsetWidth - div.clientWidth;
-  div.remove();
-  return scrollWidth;
-}
 Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="modal"]').modal();
 
 /***/ }),
