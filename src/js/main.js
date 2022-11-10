@@ -11,3 +11,4 @@ $('[data-count="second"]').on('click', () => {
 $('button').eq(2).on('click', () => {
     $('.w-500').fadeToggle(800);
 });
+
